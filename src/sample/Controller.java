@@ -2,11 +2,10 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Controller {
 
@@ -17,9 +16,8 @@ public class Controller {
     private Button exitbtn;
 
     @FXML
-    void startOnAction(ActionEvent event) {
-        Stage primaryStage = (Stage) startbtn.getScene().getWindow();
-        primaryStage.setScene(new Scene(new Pane()));
+    void startOnAction(ActionEvent event) throws IOException {
+        Main.setGameState(Main.gameState.MAP1);
     }
 
     @FXML
