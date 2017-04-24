@@ -15,6 +15,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,9 +33,14 @@ public class Main extends Application {
     public static AnchorPane stage, map1p, map2p, map3p;
     public static Scene mainmenu;
     public static Scene map1, map2, map3;
+<<<<<<< HEAD
     ArrayList<Element> bullets = new ArrayList<Element>();
     private static Element player1;
     private static Element player2;
+=======
+    public static Player player1;
+    public static Player player2;
+>>>>>>> 0a379fb56f0a5655293351d0cc4bca058687fd0f
 
 
     static Stage primaryStage;
@@ -122,6 +128,12 @@ public class Main extends Application {
             case MAP3:
                 break;
         }
+    }
+
+    public static void gameInit() {
+        player1 = new Player();
+        player2 = new Player();
+
     }
 
     public static void main(String[] args) {
