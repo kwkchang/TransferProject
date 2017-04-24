@@ -10,16 +10,17 @@ import javafx.geometry.Point2D;
 public class Element {
     private Node view;
     private Point2D velocity = new Point2D(0, 0);
-    public boolean status;
+    public boolean isAlive;
 
 
     public Element(Node view) {
         this.view = view;
     }
 
-    public void updateLocation() {
-        view.setTranslateX(view.getTranslateX() + velocity.getX() * 2);
-        view.setTranslateY(view.getTranslateY() + velocity.getY() * 2);
+
+    public void updateLocation(double constant) {
+        view.setTranslateX(view.getTranslateX() + velocity.getX() * constant);
+        view.setTranslateY(view.getTranslateY() + velocity.getY() * constant);
     }
 
     public void setVelocity(Point2D velocity) {
@@ -30,12 +31,16 @@ public class Element {
         return velocity;
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean alive() {
+        return isAlive;
+    }
+
+    public boolean dead() {
+        return !isAlive;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
+        this.isAlive = status;
     }
 
     public double getRotate() {

@@ -3,8 +3,7 @@ package sample;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -14,12 +13,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.w3c.dom.css.Rect;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//Tank GIF from http://madgharr.deviantart.com/art/8bit-Commando-424874219
+//Tank from http://piq.codeus.net/picture/85261/scorpion_tank
 
 public class Main extends Application {
 
@@ -33,17 +32,17 @@ public class Main extends Application {
     public static AnchorPane stage, map1p, map2p, map3p;
     public static Scene mainmenu;
     public static Scene map1, map2, map3;
-    ArrayList<Element> bullets = new ArrayList<Element>();
+    ArrayList<Element> bullets = new ArrayList<>();
     public static Tank player1;
     public static Tank player2;
-
 
     static Stage primaryStage;
 
     static class Tank extends Element {
         Tank() {
-            super(new Rectangle(30, 20, Color.BLUE));
+            super(new Rectangle(30,20,Color.BLUE));
         }
+
     }
 
     static class Bullet extends Element {
@@ -67,17 +66,17 @@ public class Main extends Application {
         map1p.getScene().setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.LEFT)
                 player1.rotateLeft();
-            else if (e.getCode() == KeyCode.RIGHT)
+            if (e.getCode() == KeyCode.RIGHT)
                 player1.rotateRight();
-            else if (e.getCode() == KeyCode.M) {
+            if (e.getCode() == KeyCode.M) {
                 Bullet bullet = new Bullet();
                 bullet.setVelocity(player1.getVelocity().normalize().multiply(5));
-                addToGame(bullet, player1.getView().getTranslateX(), player1.getView().getTranslateY());
-            } else if (e.getCode() == KeyCode.UP)
-                player1.updateLocation();
-            else if (e.getCode() == KeyCode.DOWN) {
-                player1.setVelocity(player1.getVelocity().subtract(5, 5));
+                addBullet(bullet, player1.getView().getTranslateX(), player1.getView().getTranslateY());
             }
+            if (e.getCode() == KeyCode.UP)
+                player1.updateLocation(3.5);
+            if (e.getCode() == KeyCode.DOWN)
+                player1.setVelocity(player1.getVelocity().subtract(5, 5));
         });
 
 
@@ -103,8 +102,11 @@ public class Main extends Application {
     }
 
     public void onUpdate() {
-        bullets.forEach(Element::updateLocation);
-        bullets.removeIf(Element::getStatus==0);
+        for (Element bullet : bullets) {
+            bullet.updateLocation(1);
+            if (bullet.dead())
+                map1p.getChildren().remove(bullet);
+        }
     }
 
     public static void setGameState(gameState gameState) throws IOException {
