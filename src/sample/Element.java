@@ -1,6 +1,5 @@
 package sample;
 
-<<<<<<< HEAD
 import javafx.scene.Node;
 
 import javafx.geometry.Point2D;
@@ -12,23 +11,12 @@ public class Element {
     private Node view;
     private Point2D velocity = new Point2D(0, 0);
     public boolean status;
-=======
-import java.awt.geom.Point2D;
-import javafx.scene.Node
 
-public class Element {
-
-    private Node view;
-    private Point2D velocity;
-
-    boolean alive = true;
->>>>>>> 0a379fb56f0a5655293351d0cc4bca058687fd0f
 
     public Element(Node view) {
         this.view = view;
     }
 
-<<<<<<< HEAD
     public void updateLocation() {
         view.setTranslateX(view.getTranslateX() + velocity.getX() * 2);
         view.setTranslateY(view.getTranslateY() + velocity.getY() * 2);
@@ -72,9 +60,5 @@ public class Element {
         return getView().getBoundsInParent().intersects(other.getView().getBoundsInParent());
     }
 
-
-
-=======
->>>>>>> 0a379fb56f0a5655293351d0cc4bca058687fd0f
 
 }
