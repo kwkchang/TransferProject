@@ -1,7 +1,7 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +22,7 @@ public class Main extends Application {
     public static Scene map1, map2, map3;
 
 
+
     static Stage primaryStage;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,6 +35,18 @@ public class Main extends Application {
         map1p = FXMLLoader.load(getClass().getResource("map1.fxml"));
         map1 = new Scene(map1p, 600, 400);
 
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                onUpdate();
+            }
+        };
+        timer.start();
+
+    }
+
+    public void onUpdate() {
+        //Hit detection, point updates, etc.
     }
 
     public static void setGameState(gameState gameState) throws IOException {
