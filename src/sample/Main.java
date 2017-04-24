@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -20,6 +21,8 @@ public class Main extends Application {
     public static Parent stage, map1p, map2p, map3p;
     public static Scene mainmenu;
     public static Scene map1, map2, map3;
+    public static Player player1;
+    public static Player player2;
 
 
     static Stage primaryStage;
@@ -51,6 +54,12 @@ public class Main extends Application {
             case MAP3:
                 break;
         }
+    }
+
+    public static void gameInit() {
+        player1 = new Player();
+        player2 = new Player();
+
     }
 
     public static void main(String[] args) {
