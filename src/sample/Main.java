@@ -18,7 +18,6 @@ import org.w3c.dom.css.Rect;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//Tank from http://piq.codeus.net/picture/85261/scorpion_tank
 
 public class Main extends Application {
 
@@ -28,11 +27,13 @@ public class Main extends Application {
         MAP2,
         MAP3
     }
+    public static Rectangle rect;
 
     public static AnchorPane stage, map1p, map2p, map3p;
     public static Scene mainmenu;
     public static Scene map1, map2, map3;
     ArrayList<Element> bullets = new ArrayList<>();
+    static ArrayList<Rectangle> walls = new ArrayList<>();
     public static Tank player1;
     public static Tank player2;
 
@@ -76,8 +77,9 @@ public class Main extends Application {
             if (e.getCode() == KeyCode.UP)
                 player1.updateLocation(3.5);
             if (e.getCode() == KeyCode.DOWN)
-                player1.setVelocity(player1.getVelocity().subtract(5, 5));
+                player1.updateLocation(-3.5);
         });
+        createWall(100,10,100,100);
 
 
         AnimationTimer timer = new AnimationTimer() {
@@ -120,17 +122,18 @@ public class Main extends Application {
                 addToGame(player1, 100, 100);
                 break;
             case MAP2:
-
+                primaryStage.setScene(map2);
                 break;
             case MAP3:
                 break;
         }
     }
 
-    public static void gameInit() {
-        player1 = new Tank();
-        player2 = new Tank();
 
+    public static void createWall(int width, int height, int x, int y) {
+        Rectangle rect = new Rectangle(x, y, width, height);
+        walls.add(rect);
+        map1p.getChildren().add(rect);
     }
 
     public static void main(String[] args) {
